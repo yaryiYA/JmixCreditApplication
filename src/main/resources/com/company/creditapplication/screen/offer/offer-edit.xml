@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://jmix.io/schema/ui/window"
+        caption="msg://offerEdit.caption"
+        focusComponent="form">
+    <data>
+        <instance id="offerDc"
+                  class="com.company.creditapplication.entity.Offer">
+            <fetchPlan extends="_base">
+                <property name="client" fetchPlan="_base"/>
+                <property name="bank" fetchPlan="_base"/>
+                <property name="creditProgram" fetchPlan="_base"/>
+                <property name="credit" fetchPlan="_base"/>
+                <property name="paymentShedule" fetchPlan="_base">
+                    <property name="offer" fetchPlan="_instance_name"/>
+                </property>
+            </fetchPlan>
+            <loader/>
+            <instance id="creditDc" property="credit"/>
+            <collection id="paymentSheduleDc" property="paymentShedule"/>
+        </instance>
+    </data>
+    <facets>
+        <dataLoadCoordinator auto="true"/>
+        <screenSettings id="settingsFacet" auto="true"/>
+    </facets>
+    <actions>
+        <action id="windowCommitAndClose" caption="msg:///actions.Ok"
+                icon="EDITOR_OK"
+                primary="true"
+                shortcut="${COMMIT_SHORTCUT}"/>
+        <action id="windowClose"
+                caption="msg:///actions.Close"
+                icon="EDITOR_CANCEL"/>
+        <action id="paymentShedule" caption="create"/>
+    </actions>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true" expand="scrollBox">
+        <scrollBox id="scrollBox" spacing="true">
+            <form id="form" dataContainer="offerDc">
+                <column id="genereteShedule" width="350px">
+                    <entityPicker id="clientField" property="client">
+                        <actions>
+                            <action id="entityLookup" type="entity_lookup">
+                                <properties/>
+                            </action>
+                            <action id="entityClear" type="entity_clear"/>
+                        </actions>
+                    </entityPicker>
+                    <entityPicker id="bankField" property="bank">
+                        <actions>
+                            <action id="entityLookup" type="entity_lookup"/>
+                            <action id="entityClear" type="entity_clear"/>
+                        </actions>
+                    </entityPicker>
+                    <entityPicker id="creditProgramField" property="creditProgram">
+                        <actions>
+                            <action id="entityLookup" type="entity_lookup"/>
+                            <action id="entityClear" type="entity_clear"/>
+                        </actions>
+                    </entityPicker>
+                    <textField id="amountField" property="amount"/>
+                    <textField id="percentField" property="percent"/>
+                    <textField id="numberMonthsField" property="numberMonths"/>
+                    <entityPicker id="creditField" property="credit">
+                        <actions>
+                            <action id="entityOpenComposition" type="entity_openComposition"/>
+                            <action id="entityClear" type="entity_clear"/>
+                        </actions>
+                    </entityPicker>
+                    <button id="paymentSheduleButton"
+                            action="paymentShedule"
+                            caption="generate"/>
+
+                    <dataGrid id="paymentShedulesTable" height="100%" width="100%" dataContainer="paymentSheduleDc">
+                        <columns>
+                            <column id="paymantDate" property="paymantDate"/>
+                            <column id="percent" property="percent"/>
+                            <column id="loanBody" property="loanBody"/>
+                            <column id="offer" property="offer"/>
+                        </columns>
+                    </dataGrid>
+                </column>
+            </form>
+        </scrollBox>
+        <hbox id="editActions" spacing="true">
+            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+            <button id="closeBtn" action="windowClose"/>
+        </hbox>
+    </layout>
+</window>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<menu-config xmlns="http://jmix.io/schema/ui/menu">
+
+    <menu id="application" caption="msg://com.company.creditapplication/menu.application" insertBefore="administration">
+        <item screen="cap_User.browse" caption="msg://com.company.creditapplication.screen.user/UserBrowse.caption"/>
+        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+        <item screen="cap_Bank.browse" caption="msg://com.company.creditapplication.screen.bank/bankBrowse.menu"/>
+        <item screen="cap_Client.browse" caption="msg://com.company.creditapplication.screen.client/clientBrowse.menu"/>
+        <item screen="cap_Credit.browse" caption="msg://com.company.creditapplication.screen.credit/creditBrowse.menu"/>
+        <item screen="cap_CreditProgram.browse"
+              caption="msg://com.company.creditapplication.screen.creditprogram/creditProgramBrowse.menu"/>
+        <item screen="cap_Offer.browse" caption="msg://com.company.creditapplication.screen.offer/offerBrowse.menu"/>
+        <item screen="cap_PaymentShedule.browse"
+              caption="msg://com.company.creditapplication.screen.paymentshedule/paymentSheduleBrowse.menu"/>
+    </menu>
+
+</menu-config>
