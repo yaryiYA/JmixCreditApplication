@@ -48,6 +48,7 @@
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
+                <action id="generateCredit" trackSelection="true"/>
             </actions>
             <columns>
                 <column id="client"/>
@@ -66,11 +67,15 @@
                         caption="msg://com.company.creditapplication.screen.offer/offerBrose.message.buttonCreate"/>
                 <button id="editBtn" action="offersTable.edit"/>
                 <button id="removeBtn" action="offersTable.remove"/>
+                <button id="generateCredit"
+                        action="offersTable.generateCredit"
+                caption="сгенерировать кредит"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>
             <button action="lookupCancelAction"/>
+
         </hbox>
     </layout>
 </window>

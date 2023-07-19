@@ -6,7 +6,11 @@ import com.company.creditapplication.service.CrudEntityService;
 import io.jmix.core.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.LockModeType;
+import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -15,30 +19,15 @@ import java.util.List;
 import java.util.UUID;
 
 import static org.aspectj.runtime.internal.Conversions.doubleValue;
+
 @Service
-public class OfferServiceImpl implements CrudEntityService<Offer> {
+public class OfferServiceImpl {
     @Autowired
     protected DataManager dataManager;
+    @PersistenceContext
+    protected EntityManager entityManager;
 
-    @Override
-    public Offer create(Offer obj) {
-        return null;
-    }
-
-    @Override
-    public List<Offer> getAll() {
-        return null;
-    }
-
-    @Override
-    public Offer getByUuid(UUID uuid) {
-        return null;
-    }
-
-    @Override
-    public void delete(Offer obj) {
-
-    }
+    @Transactional
 
     public List<PaymentShedule> generatePaymentList(Offer offer) {
         double p = offer.getPercent() / 12;
@@ -55,13 +44,25 @@ public class OfferServiceImpl implements CrudEntityService<Offer> {
             long principalAmount = monthlyPayment - interestAmount;
             summary -= principalAmount;
             PaymentShedule paymentShedule = dataManager.create(PaymentShedule.class);
+            paymentShedule.setId(UUID.randomUUID());
             paymentShedule.setPaymantDate(LocalDate.now().plusMonths(i));
             paymentShedule.setPercent(BigDecimal.valueOf(principalAmount));
             paymentShedule.setLoanBody(BigDecimal.valueOf(interestAmount));
             paymentShedule.setOffer(offer);
             paymentList.add(paymentShedule);
         }
+        if (entityManager.find(Offer.class,offer.getId()) !=null) {
+            entityManager.merge(offer);
+
+
+
+        } else {
+            entityManager.persist(offer);
+
+
+        }
+
+
         return paymentList;
     }
 }
-//offer.getCreatedDate().plusMonths(i)
