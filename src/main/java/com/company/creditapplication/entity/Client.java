@@ -1,14 +1,18 @@
 package com.company.creditapplication.entity;
 
+import com.company.creditapplication.dto.PassportDto;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
+import io.jmix.core.metamodel.annotation.JmixProperty;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.UUID;
 
 @Table(name = "cap_Client")
 @JmixEntity
@@ -41,31 +45,29 @@ public class Client extends BaseEntity {
     @NotNull
     private String email;
 
-    @NotBlank(message = "{msg://com.company.creditapplication.entity/Client.serialPassport.validation.NotBlank}")
-    @Column(name = "SERIAL_PASSPORT", nullable = false)
-    @NotNull
-    private String serialPassport;
+    @Column(name = "PASSPORT_ID")
+    private UUID passportID;
 
-    @NotBlank(message = "{msg://com.company.creditapplication.entity/Client.numberPassport.validation.NotBlank}")
-    @Column(name = "NUMBER_PASSPORT", nullable = false)
-    @NotNull
-    private String numberPassport;
+    @JmixProperty
+    @Transient
+    private PassportDto passportDto;
 
-    public String getNumberPassport() {
-        return numberPassport;
+    public PassportDto getPassportDto() {
+        return passportDto;
     }
 
-    public void setNumberPassport(String numberPassport) {
-        this.numberPassport = numberPassport;
+    public void setPassportDto(PassportDto passportDto) {
+        this.passportDto = passportDto;
     }
 
-    public String getSerialPassport() {
-        return serialPassport;
+    public UUID getPassportID() {
+        return passportID;
     }
 
-    public void setSerialPassport(String serialPassport) {
-        this.serialPassport = serialPassport;
+    public void setPassportID(UUID passportID) {
+        this.passportID = passportID;
     }
+
 
     public String getEmail() {
         return email;

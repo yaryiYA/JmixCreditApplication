@@ -6,17 +6,22 @@ import com.company.creditapplication.entity.PaymentShedule;
 import com.company.creditapplication.service.impl.OfferServiceImpl;
 import io.jmix.core.Messages;
 
+import io.jmix.core.SaveContext;
 import io.jmix.ui.Notifications;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.component.*;
 
 import io.jmix.ui.model.CollectionPropertyContainer;
+import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
 import com.company.creditapplication.entity.Offer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 
@@ -43,8 +48,6 @@ public class OfferEdit extends StandardEditor<Offer> {
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
         creditProgramIsActive();
-
-
     }
 
     @Subscribe("bankField")
@@ -79,25 +82,24 @@ public class OfferEdit extends StandardEditor<Offer> {
         creditProgramField.setEditable(!bankField.isEmpty());
     }
 
-    @Subscribe("paymentShedule")
-    public void onPaymentShedule(Action.ActionPerformedEvent event) {
-        Set<ConstraintViolation<Offer>> validate = validator.validate(getEditedEntity());
-        if (validate.isEmpty()) {
-            paymentSheduleDc.setItems(offerService.generatePaymentList(getEditedEntity()));
-        } else {
-            notifications.create(Notifications.NotificationType.ERROR)
-                    .withCaption(messages.getMessage("нет данных"))
-                    .withDescription(messages.getMessage(" заполните данные для генерации кредитных платежей"))
-                    .show();
-        }
 
-
+    @Install(target = Target.DATA_CONTEXT)
+    private Set<Object> commitDelegate(SaveContext saveContext) {
+        Offer offer = offerService.saveOfferEntityManager(getEditedEntity());
+        Set<Object> offers = new HashSet<>();
+        offers.add(offer);
+        return offers;
     }
 
 
-
-
-
+    @Subscribe(id = "offerDc", target = Target.DATA_CONTAINER)
+    public void onOfferDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<Offer> event) {
+        Set<ConstraintViolation<Offer>> validate = validator.validate(getEditedEntity());
+        if (validate.isEmpty() && !"paymentShedule".equals(event.getProperty())) {
+            List<PaymentShedule> paymentShedules = offerService.generatePaymentList(getEditedEntity());
+            paymentSheduleDc.setItems(paymentShedules);
+        }
+    }
 }
 
 

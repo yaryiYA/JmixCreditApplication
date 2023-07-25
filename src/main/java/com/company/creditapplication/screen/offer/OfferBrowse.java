@@ -10,6 +10,8 @@ import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.action.DialogAction;
 import io.jmix.ui.component.*;
+import io.jmix.ui.model.CollectionLoader;
+import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
 import com.company.creditapplication.entity.Offer;
 import io.jmix.ui.screen.LookupComponent;
@@ -25,16 +27,20 @@ public class OfferBrowse extends StandardLookup<Offer> {
     @Autowired
     private Dialogs dialogs;
     @Autowired
-    private ScreenBuilders screenBuilders;
+    DataManager dataManager;
 
     @Autowired
-    private Notifications notifications;
+    private ScreenBuilders screenBuilders;
+    @Autowired
+    private GroupTable<Offer> offersTable;
+    @Autowired
+    private Button editBtn;
+    @Autowired
+    private Button removeBtn;
     @Autowired
     private Button generateCredit;
     @Autowired
-    private GroupTable<Offer> offersTable;
-
-
+    private CollectionLoader<Offer> offersDl;
 
 
     @Subscribe("createBtn")
@@ -44,54 +50,56 @@ public class OfferBrowse extends StandardLookup<Offer> {
                 .withMessage("Зарегистрирован ли клиент?")
                 .withActions(
                         new DialogAction(DialogAction.Type.YES, Action.Status.PRIMARY)
-                                .withHandler(e -> screenBuilders.editor(Offer.class, this)
-                                        .newEntity()
-                                        .build()
-                                        .show()),
+                                .withHandler(e -> {
+                                    Screen offerEditor = screenBuilders.editor(Offer.class, this)
+                                            .newEntity()
+                                            .build();
+
+                                    offerEditor.addAfterCloseListener(afterCloseEvent -> offersDl.load());
+                                    offerEditor.show();
+
+                                }),
                         new DialogAction(DialogAction.Type.NO)
                                 .withHandler(e -> screenBuilders.editor(Client.class, this)
                                         .newEntity()
                                         .build()
                                         .show())
                 )
+
                 .show();
 
     }
 
     @Subscribe("offersTable.generateCredit")
     public void onOffersTableGenerateCredit(Action.ActionPerformedEvent event) {
-        Offer singleSelected = offersTable.getSingleSelected();
 
+        Offer singleSelected = offersTable.getSingleSelected();
+        Credit credit = dataManager.create(Credit.class);
+        credit.setIsActive(true);
+        credit.setAmount(singleSelected.getAmount());
+        credit.setNumberMounth(singleSelected.getNumberMonths());
+        credit.setPercent(singleSelected.getPercent());
+        singleSelected.setCredit(credit);
+        Offer save = dataManager.save(singleSelected);
+        Credit credit1 = save.getCredit();
 
         screenBuilders.editor(Credit.class, this)
-                .newEntity()
-                .withInitializer(credit -> {
-                    credit.setIsActive(true);
-                    credit.setPercent(singleSelected.getPercent());
-                    credit.setAmount(singleSelected.getAmount());
-                    credit.setNumberMounth(singleSelected.getNumberMonths());
-                    singleSelected.setCredit(credit);
-                })
+                .editEntity(credit1)
                 .build()
                 .show();
-
-
-
-
     }
 
-//    private Credit createCredit(Credit credit,Offer offer) {
-//
-//        Credit neWcredit = dataManager.create(Credit.class);
-//        credit.setId(UUID.randomUUID());
-//        credit.setIsActive(true);
-//        credit.setAmount(offer.getAmount());
-//        credit.setPercent(offer.getPercent());
-//        credit.setNumberMounth(offer.getNumberMonths());
-//
-//        offer.setCredit(neWcredit);
-//        return neWcredit;
-//    }
-
-
+    @Subscribe(id = "offersDc", target = Target.DATA_CONTAINER)
+    public void onOffersDcItemChange(InstanceContainer.ItemChangeEvent<Offer> event) {
+        Offer singleSelected = offersTable.getSingleSelected();
+        if (singleSelected.getCredit() == null) {
+            editBtn.setEnabled(true);
+            removeBtn.setEnabled(true);
+            generateCredit.setEnabled(true);
+        } else {
+            editBtn.setEnabled(false);
+            removeBtn.setEnabled(false);
+            generateCredit.setEnabled(false);
+        }
+    }
 }

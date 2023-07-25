@@ -5,7 +5,9 @@
     <data>
         <instance id="clientDc"
                   class="com.company.creditapplication.entity.Client">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="passportDto" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -22,10 +24,9 @@
                 caption="msg:///actions.Close"
                 icon="EDITOR_CANCEL"/>
     </actions>
-    <dialogMode height="600"
-                width="800"/>
+    <dialogMode height="600"/>
     <layout spacing="true" expand="scrollBox">
-        <scrollBox id="scrollBox" spacing="true">
+        <scrollBox id="scrollBox" spacing="true" >
             <form id="form" dataContainer="clientDc">
                 <column width="350px">
                     <textField id="firstNameField" property="firstName"/>
@@ -33,10 +34,17 @@
                     <textField id="surnameField" property="surname"/>
                     <textField id="numberPhoneField" property="numberPhone"/>
                     <textField id="emailField" property="email"/>
-                    <textField id="serialPassportField" property="serialPassport"/>
-                    <textField id="numberPassportField" property="numberPassport"/>
+                    <entityPicker id="passportDtoField" property="passportDto"/>
                 </column>
             </form>
+        </scrollBox>
+        <scrollBox id="scrollPass" spacing="true"
+                   caption="msg://com.company.creditapplication.entity/Client.offerEdit.scrollPass" width="100%">
+            <textField id="firstNameFieldPass" property="firstNamePass"/>
+            <textField id="lastNameFieldPass" property="lastNamePass"/>
+            <textField id="surnameFieldPass" property="surnamePass"/>
+            <textField id="serialPassportFieldPass" property="serialPassportPass"/>
+            <textField id="numberPassportFieldPass" property="numberPassportPass"/>
         </scrollBox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>

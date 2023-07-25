@@ -64,12 +64,13 @@
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
                 <button id="createBtn"
-                        caption="msg://com.company.creditapplication.screen.offer/offerBrose.message.buttonCreate"/>
+                        caption="msg://com.company.creditapplication.screen.offer/offerBrose.message.buttonCreate"
+                        primary="true"/>
                 <button id="editBtn" action="offersTable.edit"/>
                 <button id="removeBtn" action="offersTable.remove"/>
                 <button id="generateCredit"
                         action="offersTable.generateCredit"
-                caption="сгенерировать кредит"/>
+                        caption="сгенерировать кредит"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

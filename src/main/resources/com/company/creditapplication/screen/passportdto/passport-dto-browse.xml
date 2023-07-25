@@ -1,19 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://jmix.io/schema/ui/window"
         xmlns:c="http://jmix.io/schema/ui/jpql-condition"
-        caption="msg://clientBrowse.caption"
-        focusComponent="clientsTable">
+        caption="msg://passportDtoBrowse.caption"
+        focusComponent="passportDtoesTable">
     <data readOnly="true">
-        <collection id="clientsDc"
-                    class="com.company.creditapplication.entity.Client">
-            <fetchPlan extends="_base">
-                <property name="passportDto" fetchPlan="_base"/>
-            </fetchPlan>
-            <loader id="clientsDl">
-                <query>
-                    <![CDATA[select e from cap_Client e]]>
-                </query>
-            </loader>
+        <collection id="passportDtoesDc"
+                    class="com.company.creditapplication.dto.PassportDto">
+            <loader id="passportDtoesDl"/>
         </collection>
     </data>
     <facets>
@@ -32,14 +25,10 @@
     </actions>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="clientsTable" spacing="true">
-        <filter id="filter"
-                dataLoader="clientsDl">
-            <properties include=".*"/>
-        </filter>
-        <groupTable id="clientsTable"
+    <layout expand="passportDtoesTable" spacing="true">
+        <groupTable id="passportDtoesTable"
                     width="100%"
-                    dataContainer="clientsDc">
+                    dataContainer="passportDtoesDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
@@ -49,17 +38,14 @@
                 <column id="firstName"/>
                 <column id="lastName"/>
                 <column id="surname"/>
-                <column id="numberPhone"/>
-                <column id="email"/>
-                <column id="passportID"/>
-                <column id="passportDto"/>
+                <column id="serialPassport"/>
+                <column id="numberPassport"/>
             </columns>
-            <simplePagination/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="clientsTable.create"/>
-                <button id="editBtn" action="clientsTable.edit"/>
-                <button id="removeBtn" action="clientsTable.remove"/>
+                <button id="createBtn" action="passportDtoesTable.create"/>
+                <button id="editBtn" action="passportDtoesTable.edit"/>
+                <button id="removeBtn" action="passportDtoesTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

@@ -12,6 +12,8 @@
         <item screen="cap_Offer.browse" caption="msg://com.company.creditapplication.screen.offer/offerBrowse.menu"/>
         <item screen="cap_PaymentShedule.browse"
               caption="msg://com.company.creditapplication.screen.paymentshedule/paymentSheduleBrowse.menu"/>
+        <item screen="cap_PassportDto.browse"
+              caption="msg://com.company.creditapplication.screen.passportdto/passportDtoBrowse.menu"/>
     </menu>
 
 </menu-config>

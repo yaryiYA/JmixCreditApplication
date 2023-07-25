@@ -2,19 +2,16 @@ package com.company.creditapplication.service.impl;
 
 import com.company.creditapplication.entity.Offer;
 import com.company.creditapplication.entity.PaymentShedule;
-import com.company.creditapplication.service.CrudEntityService;
 import io.jmix.core.DataManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
 import javax.persistence.PersistenceContext;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -28,6 +25,10 @@ public class OfferServiceImpl {
     protected EntityManager entityManager;
 
     @Transactional
+    public Offer saveOfferEntityManager(Offer offer) {
+        return entityManager.merge(offer);
+
+    }
 
     public List<PaymentShedule> generatePaymentList(Offer offer) {
         double p = offer.getPercent() / 12;
@@ -51,18 +52,6 @@ public class OfferServiceImpl {
             paymentShedule.setOffer(offer);
             paymentList.add(paymentShedule);
         }
-        if (entityManager.find(Offer.class,offer.getId()) !=null) {
-            entityManager.merge(offer);
-
-
-
-        } else {
-            entityManager.persist(offer);
-
-
-        }
-
-
         return paymentList;
     }
 }

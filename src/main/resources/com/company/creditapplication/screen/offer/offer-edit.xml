@@ -62,7 +62,7 @@
                     <textField id="amountField" property="amount"/>
                     <textField id="percentField" property="percent"/>
                     <textField id="numberMonthsField" property="numberMonths"/>
-                    <entityPicker id="creditField" property="credit">
+                    <entityPicker id="creditField" property="credit" visible="false">
                         <actions>
                             <action id="entityOpenComposition" type="entity_openComposition"/>
                             <action id="entityClear" type="entity_clear"/>
@@ -70,9 +70,10 @@
                     </entityPicker>
                     <button id="paymentSheduleButton"
                             action="paymentShedule"
-                            caption="generate"/>
+                            caption="msg://com.company.creditapplication.screen.offer/offerEdit.buttonGenerate"/>
 
-                    <dataGrid id="paymentShedulesTable" height="100%" width="100%" dataContainer="paymentSheduleDc">
+                    <dataGrid id="paymentShedulesTable" height="100%" width="100%" dataContainer="paymentSheduleDc"
+                              align="MIDDLE_LEFT">
                         <columns>
                             <column id="paymantDate" property="paymantDate"/>
                             <column id="percent" property="percent"/>
