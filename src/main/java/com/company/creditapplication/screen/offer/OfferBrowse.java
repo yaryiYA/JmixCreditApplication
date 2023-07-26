@@ -102,4 +102,6 @@ public class OfferBrowse extends StandardLookup<Offer> {
             generateCredit.setEnabled(false);
         }
     }
+
+
 }

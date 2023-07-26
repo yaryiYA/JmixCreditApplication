@@ -6,22 +6,6 @@
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
     <changeSet id="1" author="cap">
-        <createTable tableName="CAP_BASE_DTO">
-            <column name="ID" type="UUID">
-                <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_BASE_DTO"/>
-            </column>
-            <column name="VERSION" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="CREATED_DATE" type="DATETIME"/>
-            <column name="firstName" type="VARCHAR(255)"/>
-            <column name="lastName" type="VARCHAR(255)"/>
-            <column name="surname" type="VARCHAR(255)"/>
-            <column name="serialPassport" type="INT"/>
-            <column name="numberPassport" type="VARCHAR(255)"/>
-        </createTable>
-    </changeSet>
-    <changeSet id="2" author="cap">
         <createTable tableName="cap_Bank">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_BANK"/>
@@ -38,7 +22,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="3" author="cap">
+    <changeSet id="2" author="cap">
         <createTable tableName="cap_Client">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_CLIENT"/>
@@ -66,7 +50,7 @@
             <column name="PASSPORT_ID" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="4" author="cap">
+    <changeSet id="3" author="cap">
         <createTable tableName="cap_Credit">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_CREDIT"/>
@@ -86,7 +70,7 @@
             <column name="NUMBER_MOUNTH" type="INT"/>
         </createTable>
     </changeSet>
-    <changeSet id="5" author="cap">
+    <changeSet id="4" author="cap">
         <createTable tableName="cap_CreditProgram">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_CREDITPROGRAM"/>
@@ -115,7 +99,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="6" author="cap">
+    <changeSet id="5" author="cap">
         <createTable tableName="cap_Offer">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_OFFER"/>
@@ -146,7 +130,7 @@
             <column name="CREDIT_ID" type="UUID"/>
         </createTable>
     </changeSet>
-    <changeSet id="7" author="cap">
+    <changeSet id="6" author="cap">
         <createTable tableName="cap_PaymentShedule">
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_PAYMENTSHEDULE"/>
@@ -170,7 +154,7 @@
             </column>
         </createTable>
     </changeSet>
-    <changeSet id="8" author="cap">
+    <changeSet id="7" author="cap">
         <createIndex indexName="IDX_CAP_PAYMENTSHEDULE_OFFER" tableName="cap_PaymentShedule">
             <column name="OFFER_ID"/>
         </createIndex>
@@ -179,29 +163,29 @@
                                  constraintName="FK_CAP_PAYMENTSHEDULE_ON_OFFER" onDelete="CASCADE"
                                  referencedColumnNames="ID" referencedTableName="cap_Offer"/>
     </changeSet>
-    <changeSet id="9" author="cap">
+    <changeSet id="8" author="cap">
         <addForeignKeyConstraint baseColumnNames="BANK_ID" baseTableName="cap_CreditProgram"
                                  constraintName="FK_CAP_CREDITPROGRAM_ON_BANK" onDelete="CASCADE"
                                  referencedColumnNames="ID" referencedTableName="cap_Bank"/>
     </changeSet>
-    <changeSet id="10" author="cap">
+    <changeSet id="9" author="cap">
         <addForeignKeyConstraint baseColumnNames="BANK_ID" baseTableName="cap_Offer"
                                  constraintName="FK_CAP_OFFER_ON_BANK" onDelete="CASCADE" referencedColumnNames="ID"
                                  referencedTableName="cap_Bank"/>
     </changeSet>
-    <changeSet id="11" author="cap">
+    <changeSet id="10" author="cap">
         <addForeignKeyConstraint baseColumnNames="CLIENT_ID" baseTableName="cap_Offer"
                                  constraintName="FK_CAP_OFFER_ON_CLIENT" referencedColumnNames="ID"
                                  referencedTableName="cap_Client"/>
     </changeSet>
-    <changeSet id="12" author="cap">
+    <changeSet id="11" author="cap">
         <addForeignKeyConstraint baseColumnNames="CREDIT_ID" baseTableName="cap_Offer"
                                  constraintName="FK_CAP_OFFER_ON_CREDIT" referencedColumnNames="ID"
                                  referencedTableName="cap_Credit"/>
     </changeSet>
-    <changeSet id="13" author="cap">
+    <changeSet id="12" author="cap">
         <addForeignKeyConstraint baseColumnNames="CREDIT_PROGRAM_ID" baseTableName="cap_Offer"
                                  constraintName="FK_CAP_OFFER_ON_CREDIT_PROGRAM" referencedColumnNames="ID"
                                  referencedTableName="cap_CreditProgram"/>
-    </changeSet>
+</changeSet>
 </databaseChangeLog>

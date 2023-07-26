@@ -57,8 +57,8 @@
                 <column id="amount"/>
                 <column id="percent"/>
                 <column id="numberMonths"/>
-                <column id="credit"/>
-                <column id="paymentShedule"/>
+                <column id="credit" visible="false"/>
+                <column id="paymentShedule" visible="false"/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"

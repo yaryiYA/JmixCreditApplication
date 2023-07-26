@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.11.xsd"
+        objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
+    <property name="uuid_function" value="gen_random_uuid()" dbms="postgresql"/>
+    <changeSet id="1" author="cap">
+
+        <insert tableName="cap_Bank">
+            <column name="id" valueComputed="${uuid_function}"/>
+            <column name="VERSION">0</column>
+            <column name="NAME">Сейв-Банк</column>
+
+        </insert>
+        <insert tableName="cap_Bank">
+            <column name="id" valueComputed="${uuid_function}"/>
+            <column name="NAME">Сельхоз-Банк</column>
+            <column name="VERSION" type="int" defaultValue="0">0</column>
+        </insert>
+
+        <insert tableName="cap_Bank">
+            <column name="id" valueComputed="${uuid_function}"/>
+            <column name="NAME">Бета-Банк</column>
+            <column name="VERSION" type="int" defaultValue="0">0</column>
+
+        </insert>
+    </changeSet>
+</databaseChangeLog>

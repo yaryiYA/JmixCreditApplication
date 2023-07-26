@@ -51,8 +51,8 @@
                 <column id="surname"/>
                 <column id="numberPhone"/>
                 <column id="email"/>
-                <column id="passportID"/>
-                <column id="passportDto"/>
+                <column id="passportID" visible="false"/>
+                <column id="passportDto" visible="false"/>/>
             </columns>
             <simplePagination/>
             <buttonsPanel id="buttonsPanel"
