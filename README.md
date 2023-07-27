@@ -21,7 +21,7 @@ graph TD;
     bank-->offer;
     offer-->client;
     offer-->credit;
-    offer->payment Shedule;
+    offer->paymentShedule;
 ```
 
 
