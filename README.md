@@ -18,10 +18,10 @@ Jmix предоставляет множество готовых к испол�
 ## Модель данных
  ```mermaid
 graph TD;
-    A-->B;
-    A-->C;
-    B-->D;
-    C-->D;
+    bank-->offer;
+    offer-->client;
+    offer-->credit;
+    offer->payment Shedule;
 ```
 
 
