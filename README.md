@@ -17,12 +17,12 @@ Jmix предоставляет множество готовых к испол�
 
 ## Модель данных
 
- ```mermaid
-graph TD;
-    bank-->offer;
-    offer-->client;
-    offer-->credit;
-    offer->paymentShedule;
+```mermaid
+  graph TD;
+      bank-->B;
+      bank-->C;
+      B-->D;
+      C-->D;
 ```
 
 
