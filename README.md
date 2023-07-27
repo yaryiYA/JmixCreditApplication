@@ -19,11 +19,14 @@ Jmix предоставляет множество готовых к испол�
 
 ```mermaid
   graph TD;
-      client-->bank;
-      bank-->B;
-      bank-->C;
-      B-->D;
-      C-->D;
+      bank-->creditProgram;
+      bank-->offer;
+      creditProgram-->creditType;
+      offer-->creditType;
+      offer-->credit;
+      offer-->client;
+      offer-->PaymentShedule;
+      user;
 ```
 
 
