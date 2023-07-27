@@ -68,12 +68,7 @@
                             <action id="entityClear" type="entity_clear"/>
                         </actions>
                     </entityPicker>
-                    <button id="paymentSheduleButton"
-                            action="paymentShedule"
-                            caption="msg://com.company.creditapplication.screen.offer/offerEdit.buttonGenerate"/>
-
-                    <dataGrid id="paymentShedulesTable" height="100%" width="100%" dataContainer="paymentSheduleDc"
-                              align="MIDDLE_LEFT">
+                    <dataGrid id="paymentShedulesTable" height="100%" width="100%" dataContainer="paymentSheduleDc">
                         <columns>
                             <column id="paymantDate" property="paymantDate"/>
                             <column id="percent" property="percent"/>

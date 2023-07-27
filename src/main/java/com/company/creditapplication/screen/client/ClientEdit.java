@@ -32,23 +32,18 @@ public class ClientEdit extends StandardEditor<Client> {
     private ScrollBoxLayout scrollPass;
 
 
-
     @Subscribe("passportDtoField")
     public void onPassportDtoFieldValueChange(HasValue.ValueChangeEvent<PassportDto> event) {
         PassportDto value = passportDtoField.getValue();
         getEditedEntity().setPassportID(value.getId());
-
     }
-
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
 
-
         if (getEditedEntity().getPassportID() != null) {
             passportDtoField.setVisible(false);
             scrollPass.setVisible(true);
-
             PassportDto passportDto = clientPass.findByUUID(getEditedEntity().getPassportID());
             firstNameFieldPass.setValue(passportDto.getFirstName());
             lastNameFieldPass.setValue(passportDto.getLastName());
@@ -59,6 +54,5 @@ public class ClientEdit extends StandardEditor<Client> {
             scrollPass.setVisible(false);
             passportDtoField.setVisible(true);
         }
-
     }
 }

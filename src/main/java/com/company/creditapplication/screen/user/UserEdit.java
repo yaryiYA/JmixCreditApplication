@@ -25,25 +25,18 @@ public class UserEdit extends StandardEditor<User> {
 
     @Autowired
     private EntityStates entityStates;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private PasswordField passwordField;
-
     @Autowired
     private TextField<String> usernameField;
-
     @Autowired
     private PasswordField confirmPasswordField;
-
     @Autowired
     private Notifications notifications;
-
     @Autowired
     private MessageBundle messageBundle;
-
     @Autowired
     private ComboBox<String> timeZoneField;
 

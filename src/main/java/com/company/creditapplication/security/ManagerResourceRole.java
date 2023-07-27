@@ -17,7 +17,7 @@ public interface ManagerResourceRole {
     @ScreenPolicy(screenIds = {"cap_Bank.browse", "cap_Client.browse", "cap_Credit.browse", "cap_CreditProgram.browse", "cap_Offer.browse", "cap_PassportDto.browse", "bulkEditorWindow", "ui_LayoutAnalyzerScreen", "singleFileUploadDialog", "ui_AddConditionScreen", "ui_JpqlFilterCondition.edit", "ui_PropertyFilterCondition.edit", "ui_GroupFilterCondition.edit", "ui_FilterConfigurationModel.fragment", "ui_MBeanInspectScreen", "ui_MBeanAttribute.edit", "ui_MBeanOperationResultScreen", "ui_MBeanOperationFragment", "notFoundScreen", "inputDialog", "selectValueDialog", "backgroundWorkProgressScreen", "ui_DateIntervalDialog", "ui_UiDataFilterConfigurationModel.fragment", "sec_RoleFilterFragment", "sec_ResourceRoleModel.lookup", "sec_ResourceRoleModel.edit", "sec_RowLevelRoleModel.edit", "sec_RowLevelRoleModel.lookup", "ResetPasswordDialog", "ChangePasswordDialog", "sec_ScreenResourcePolicyModel.edit", "sec_MenuResourcePolicyModel.edit", "sec_ScreenResourcePolicyModel.create", "sec_MenuResourcePolicyModel.create", "sec_EntityResourcePolicyModel.create", "sec_EntityAttributeResourcePolicyModel.create", "sec_EntityAttributeResourcePolicyModel.edit", "sec_GraphQLResourcePolicyModel.edit", "sec_EntityResourcePolicyModel.edit", "sec_ResourcePolicyModel.edit", "sec_SpecificResourcePolicyModel.edit", "sec_RoleAssignmentScreen", "sec_RoleAssignmentFragment", "sec_RowLevelPolicyModel.edit", "sec_UserSubstitutionEntity.edit", "sec_UserSubstitutionsFragment", "sec_UserSubstitutionsScreen", "entityInfoWindow", "entityInspector.edit", "cap_Bank.edit", "cap_MainScreen", "cap_LoginScreen", "cap_Offer.edit", "cap_Client.edit", "cap_CreditProgram.edit", "cap_PassportDto.edit"})
     void screens();
 
-    @SpecificPolicy(resources = {"ui.bulkEdit.enabled", "ui.filter.modifyConfiguration", "ui.loginToUi", "ui.filter.modifyGlobalConfiguration", "ui.presentations.global", "ui.filter.modifyJpqlCondition", "datatools.ui.showEntityInfo"})
+    @SpecificPolicy(resources = {"ui.bulkEdit.enabled", "ui.filter.modifyConfiguration", "ui.loginToUi", "ui.filter.modifyGlobalConfiguration", "ui.presentations.global", "datatools.ui.showEntityInfo", "ui.filter.modifyJpqlCondition"})
     void specific();
 
     @EntityAttributePolicy(entityClass = Bank.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
@@ -51,4 +51,5 @@ public interface ManagerResourceRole {
     @EntityAttributePolicy(entityClass = PaymentShedule.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     @EntityPolicy(entityClass = PaymentShedule.class, actions = EntityPolicyAction.ALL)
     void paymentShedule();
+
 }

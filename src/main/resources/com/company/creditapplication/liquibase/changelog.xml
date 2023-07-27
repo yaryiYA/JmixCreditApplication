@@ -11,6 +11,8 @@
     <include file="/io/jmix/uidata/liquibase/changelog.xml"/>
     <include file="/io/jmix/securitydata/liquibase/changelog.xml"/>
 
+    <include file="com/company/creditapplication/liquibase/changelog/bank-init.xml"/>
+
     <includeAll path="/com/company/creditapplication/liquibase/changelog"/>
 
 </databaseChangeLog>

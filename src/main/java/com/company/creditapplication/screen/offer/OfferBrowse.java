@@ -4,6 +4,7 @@ import com.company.creditapplication.entity.Client;
 import com.company.creditapplication.entity.Credit;
 import com.company.creditapplication.screen.client.ClientEdit;
 import io.jmix.core.DataManager;
+import io.jmix.core.Messages;
 import io.jmix.ui.Dialogs;
 import io.jmix.ui.Notifications;
 import io.jmix.ui.ScreenBuilders;
@@ -28,7 +29,6 @@ public class OfferBrowse extends StandardLookup<Offer> {
     private Dialogs dialogs;
     @Autowired
     DataManager dataManager;
-
     @Autowired
     private ScreenBuilders screenBuilders;
     @Autowired
@@ -41,13 +41,15 @@ public class OfferBrowse extends StandardLookup<Offer> {
     private Button generateCredit;
     @Autowired
     private CollectionLoader<Offer> offersDl;
+    @Autowired
+    Messages messages;
 
 
     @Subscribe("createBtn")
     public void onCreateBtnClick(Button.ClickEvent event) {
         dialogs.createOptionDialog()
-                .withCaption("Пожалуйста подтвердите")
-                .withMessage("Зарегистрирован ли клиент?")
+                .withCaption(messages.getMessage("com.company.creditapplication.screen.offer/offerBrowse.buttonCreateCaption"))
+                .withMessage(messages.getMessage("com.company.creditapplication.screen.offer/offerBrowse.buttonCreateMessages"))
                 .withActions(
                         new DialogAction(DialogAction.Type.YES, Action.Status.PRIMARY)
                                 .withHandler(e -> {
@@ -65,9 +67,7 @@ public class OfferBrowse extends StandardLookup<Offer> {
                                         .build()
                                         .show())
                 )
-
                 .show();
-
     }
 
     @Subscribe("offersTable.generateCredit")
@@ -102,6 +102,4 @@ public class OfferBrowse extends StandardLookup<Offer> {
             generateCredit.setEnabled(false);
         }
     }
-
-
 }

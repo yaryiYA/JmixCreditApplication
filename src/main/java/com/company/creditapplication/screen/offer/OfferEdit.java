@@ -8,7 +8,6 @@ import io.jmix.core.Messages;
 
 import io.jmix.core.SaveContext;
 import io.jmix.ui.Notifications;
-import io.jmix.ui.action.Action;
 import io.jmix.ui.component.*;
 
 import io.jmix.ui.model.CollectionPropertyContainer;
@@ -19,7 +18,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,7 +41,6 @@ public class OfferEdit extends StandardEditor<Offer> {
     private EntityPicker<Bank> bankField;
     @Autowired
     private CollectionPropertyContainer<PaymentShedule> paymentSheduleDc;
-
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
@@ -90,7 +87,6 @@ public class OfferEdit extends StandardEditor<Offer> {
         offers.add(offer);
         return offers;
     }
-
 
     @Subscribe(id = "offerDc", target = Target.DATA_CONTAINER)
     public void onOfferDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<Offer> event) {

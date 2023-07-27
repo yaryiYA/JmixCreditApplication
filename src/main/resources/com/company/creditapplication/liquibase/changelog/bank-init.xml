@@ -7,7 +7,6 @@
         objectQuotingStrategy="QUOTE_ONLY_RESERVED_WORDS">
     <property name="uuid_function" value="gen_random_uuid()" dbms="postgresql"/>
     <changeSet id="1" author="cap">
-
         <insert tableName="cap_Bank">
             <column name="id" valueComputed="${uuid_function}"/>
             <column name="VERSION">0</column>
@@ -24,7 +23,6 @@
             <column name="id" valueComputed="${uuid_function}"/>
             <column name="NAME">Бета-Банк</column>
             <column name="VERSION" type="int" defaultValue="0">0</column>
-
         </insert>
     </changeSet>
 </databaseChangeLog>
