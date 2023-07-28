@@ -3,8 +3,22 @@ package com.company.creditapplication.dto;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import java.util.Date;
+import java.util.UUID;
+
 @JmixEntity(name = "cap_PassportDto")
-public class PassportDto extends BaseDto {
+public class PassportDto {
+
+    private UUID id;
+
+    private Integer version;
+
+
+    @Temporal(TemporalType.DATE)
+    private Date createdDate;
+
     @InstanceName
     private String firstName;
 
@@ -14,14 +28,26 @@ public class PassportDto extends BaseDto {
 
     private Integer serialPassport;
 
-    private String numberPassport;
+    private Integer numberPassport;
 
-    public String getNumberPassport() {
+    public void setNumberPassport(Integer numberPassport) {
+        this.numberPassport = numberPassport;
+    }
+
+    public Integer getNumberPassport() {
         return numberPassport;
     }
 
-    public void setNumberPassport(String numberPassport) {
-        this.numberPassport = numberPassport;
+    public UUID getId() {
+        return id;
+    }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public Date getCreatedDate() {
+        return createdDate;
     }
 
     public Integer getSerialPassport() {
@@ -54,5 +80,16 @@ public class PassportDto extends BaseDto {
 
     public void setFirstName(String firstName) {
         this.firstName = firstName;
+    }
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
+    public void setCreatedDate(Date createdDate) {
+        this.createdDate = createdDate;
     }
 }

@@ -80,11 +80,10 @@ public class OfferBrowse extends StandardLookup<Offer> {
         credit.setNumberMounth(singleSelected.getNumberMonths());
         credit.setPercent(singleSelected.getPercent());
         singleSelected.setCredit(credit);
-        Offer save = dataManager.save(singleSelected);
-        Credit credit1 = save.getCredit();
+        singleSelected =  dataManager.save(singleSelected);
 
         screenBuilders.editor(Credit.class, this)
-                .editEntity(credit1)
+                .editEntity(singleSelected.getCredit())
                 .build()
                 .show();
     }

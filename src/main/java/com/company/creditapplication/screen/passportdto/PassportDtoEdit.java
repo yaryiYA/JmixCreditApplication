@@ -16,7 +16,7 @@ import java.util.Set;
 @EditedEntityContainer("passportDtoDc")
 public class PassportDtoEdit extends StandardEditor<PassportDto> {
     @Autowired
-    ClientPass clientPass;
+    private ClientPass clientPass;
 
     @Install(to = "passportDtoDl", target = Target.DATA_LOADER)
     private PassportDto passportDtoDlLoadDelegate(LoadContext<PassportDto> loadContext) {
