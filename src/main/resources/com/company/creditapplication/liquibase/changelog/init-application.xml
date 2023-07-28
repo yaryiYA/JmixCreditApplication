@@ -27,6 +27,13 @@
             <column name="ID" type="UUID">
                 <constraints nullable="false" primaryKey="true" primaryKeyName="PK_CAP_CLIENT"/>
             </column>
+            <column name="VERSION" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_BY" type="VARCHAR(255)"/>
+            <column name="CREATED_DATE" type="DATE"/>
+            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
+            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
             <column name="FIRST_NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
@@ -41,13 +48,6 @@
                 <constraints nullable="false"/>
             </column>
             <column name="PASSPORT_ID" type="UUID"/>
-            <column name="VERSION" type="INT">
-                <constraints nullable="false"/>
-            </column>
-            <column name="CREATED_BY" type="VARCHAR(255)"/>
-            <column name="CREATED_DATE" type="DATETIME"/>
-            <column name="LAST_MODIFIED_BY" type="VARCHAR(255)"/>
-            <column name="LAST_MODIFIED_DATE" type="DATETIME"/>
         </createTable>
     </changeSet>
     <changeSet id="3" author="cap">

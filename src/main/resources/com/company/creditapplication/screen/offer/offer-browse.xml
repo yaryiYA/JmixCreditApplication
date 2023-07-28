@@ -8,7 +8,6 @@
                     class="com.company.creditapplication.entity.Offer">
             <fetchPlan extends="_base">
                 <property name="client" fetchPlan="_base"/>
-                <property name="bank" fetchPlan="_base"/>
                 <property name="creditProgram" fetchPlan="_base"/>
                 <property name="credit" fetchPlan="_base"/>
                 <property name="paymentShedule" fetchPlan="_base"/>
@@ -52,7 +51,6 @@
             </actions>
             <columns>
                 <column id="client"/>
-                <column id="bank"/>
                 <column id="creditProgram"/>
                 <column id="amount"/>
                 <column id="percent"/>

@@ -68,12 +68,12 @@
                             <action id="entityClear" type="entity_clear"/>
                         </actions>
                     </entityPicker>
-                    <dataGrid id="paymentShedulesTable" height="100%" width="100%" dataContainer="paymentSheduleDc">
+                    <dataGrid id="paymentShedulesTable" height="100%" width="700px" dataContainer="paymentSheduleDc">
                         <columns>
                             <column id="paymantDate" property="paymantDate"/>
                             <column id="percent" property="percent"/>
                             <column id="loanBody" property="loanBody"/>
-                            <column id="offer" property="offer"/>
+
                         </columns>
                     </dataGrid>
                 </column>

@@ -2,10 +2,13 @@ package com.company.creditapplication.screen.client;
 
 import com.company.creditapplication.dto.PassportDto;
 import com.company.creditapplication.webclient.ClientPass;
+import io.jmix.core.DataManager;
+import io.jmix.core.LoadContext;
 import io.jmix.ui.component.EntityPicker;
 import io.jmix.ui.component.HasValue;
 import io.jmix.ui.component.ScrollBoxLayout;
 import io.jmix.ui.component.TextField;
+import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.screen.*;
 import com.company.creditapplication.entity.Client;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class ClientEdit extends StandardEditor<Client> {
     @Autowired
     protected ClientPass clientPass;
+    @Autowired
+    protected DataManager dataManager;
     @Autowired
     private EntityPicker<PassportDto> passportDtoField;
     @Autowired
@@ -41,10 +46,10 @@ public class ClientEdit extends StandardEditor<Client> {
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
 
-        if (getEditedEntity().getPassportID() != null) {
+        if (getEditedEntity().getPassportDto() != null) {
             passportDtoField.setVisible(false);
             scrollPass.setVisible(true);
-            PassportDto passportDto = clientPass.findByUUID(getEditedEntity().getPassportID());
+            PassportDto passportDto = getEditedEntity().getPassportDto();
             firstNameFieldPass.setValue(passportDto.getFirstName());
             lastNameFieldPass.setValue(passportDto.getLastName());
             surnameFieldPass.setValue(passportDto.getSurname());
@@ -55,4 +60,17 @@ public class ClientEdit extends StandardEditor<Client> {
             passportDtoField.setVisible(true);
         }
     }
+
+    @Install(to = "passportDtoLoader", target = Target.DATA_LOADER)
+    private Client passportDtoLoaderLoadDelegate(LoadContext<Client> loadContext) {
+        Client editedEntity = getEditedEntity();
+        if (getEditedEntity().getPassportID() != null) {
+            editedEntity.setPassportDto(clientPass.findByUUID(editedEntity.getPassportID()));
+        }
+        return editedEntity;
+
+    }
+
+
 }
+

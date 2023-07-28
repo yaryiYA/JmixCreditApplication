@@ -6,10 +6,17 @@
         <instance id="clientDc"
                   class="com.company.creditapplication.entity.Client">
             <fetchPlan extends="_base">
-                <property name="passportDto" fetchPlan="_base"/>
+                <property name="passportDto" fetchPlan="_base">
+                    <property name="id"/>
+                    <property name="lastName"/>
+                    <property name="surname"/>
+                    <property name="serialPassport"/>
+                    <property name="numberPassport"/>
+                </property>
             </fetchPlan>
-            <loader/>
+            <loader id="passportDtoLoader"/>
         </instance>
+
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -38,7 +45,7 @@
                 </column>
             </form>
         </scrollBox>
-        <scrollBox id="scrollPass" spacing="true"
+        <scrollBox id="scrollPass"  spacing="true"
                    caption="msg://com.company.creditapplication.entity/Client.offerEdit.scrollPass" width="100%">
             <textField id="firstNameFieldPass" property="firstNamePass"/>
             <textField id="lastNameFieldPass" property="lastNamePass"/>

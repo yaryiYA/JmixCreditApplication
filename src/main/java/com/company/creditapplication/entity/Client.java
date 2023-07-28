@@ -1,26 +1,23 @@
 package com.company.creditapplication.entity;
 
 import com.company.creditapplication.dto.PassportDto;
-import io.jmix.core.entity.annotation.JmixGeneratedValue;
 import io.jmix.core.metamodel.annotation.InstanceName;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 import io.jmix.core.metamodel.annotation.JmixProperty;
-import org.springframework.data.annotation.CreatedBy;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedBy;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.util.Date;
 import java.util.UUID;
 
 @Table(name = "cap_Client")
 @JmixEntity
 @Entity(name = "cap_Client")
-public class Client extends BaseEntity{
+public class Client extends BaseEntity {
     @NotBlank(message = "{msg://com.company.creditapplication.entity/Client.firstName.validation.NotBlank}")
     @InstanceName
     @Column(name = "FIRST_NAME", nullable = false)
