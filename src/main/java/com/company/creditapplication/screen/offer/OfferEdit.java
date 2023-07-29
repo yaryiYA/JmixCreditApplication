@@ -85,6 +85,7 @@ public class OfferEdit extends StandardEditor<Offer> {
         Offer offer = offerService.saveOfferEntityManager(getEditedEntity());
         Set<Object> offers = new HashSet<>();
         offers.add(offer);
+
         return offers;
     }
 

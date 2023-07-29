@@ -48,6 +48,7 @@ public class Client extends BaseEntity {
     @Column(name = "PASSPORT_ID")
     private UUID passportID;
 
+    @NotNull(message = "{msg://com.company.creditapplication.entity/Client.passportDto.validation.NotNull}")
     @JmixProperty
     @Transient
     private PassportDto passportDto;
@@ -58,6 +59,7 @@ public class Client extends BaseEntity {
     }
 
     public void setPassportDto(PassportDto passportDto) {
+        this.setPassportID(passportDto.getId());
         this.passportDto = passportDto;
     }
 

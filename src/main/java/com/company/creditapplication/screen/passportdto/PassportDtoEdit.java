@@ -28,6 +28,7 @@ public class PassportDtoEdit extends StandardEditor<PassportDto> {
         PassportDto passportDto = clientPass.create(getEditedEntity());
         Set<Object> objects = new HashSet<>();
         objects.add(passportDto);
+
         return objects;
     }
 }

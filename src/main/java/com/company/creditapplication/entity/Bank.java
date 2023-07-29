@@ -28,18 +28,6 @@ public class Bank extends BaseEntity {
     @OneToMany(mappedBy = "bank")
     private List<CreditProgram> creditProgram;
 
-    @Composition
-    @OneToMany(mappedBy = "bank")
-    private List<Offer> offer;
-
-    public List<Offer> getOffer() {
-        return offer;
-    }
-
-    public void setOffer(List<Offer> offer) {
-        this.offer = offer;
-    }
-
     public List<CreditProgram> getCreditProgram() {
         return creditProgram;
     }

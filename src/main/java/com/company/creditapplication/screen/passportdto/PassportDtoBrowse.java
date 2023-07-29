@@ -15,7 +15,7 @@ import java.util.List;
 public class PassportDtoBrowse extends StandardLookup<PassportDto> {
 
     @Autowired
-    ClientPass clientPass;
+    private ClientPass clientPass;
 
     @Install(to = "passportDtoesDl", target = Target.DATA_LOADER)
     private List<PassportDto> passportDtoesDlLoadDelegate(LoadContext<PassportDto> loadContext) {

@@ -1,7 +1,5 @@
 package com.company.creditapplication.entity;
 
-import io.jmix.core.DeletePolicy;
-import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.Composition;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
@@ -20,7 +18,7 @@ public class Offer extends BaseEntity {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Client client;
 
-    @OnDeleteInverse(DeletePolicy.CASCADE)
+
     @JoinColumn(name = "BANK_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Bank bank;

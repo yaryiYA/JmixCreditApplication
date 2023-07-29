@@ -2,11 +2,10 @@ package com.company.creditapplication.screen.offer;
 
 import com.company.creditapplication.entity.Client;
 import com.company.creditapplication.entity.Credit;
-import com.company.creditapplication.screen.client.ClientEdit;
+
 import io.jmix.core.DataManager;
 import io.jmix.core.Messages;
 import io.jmix.ui.Dialogs;
-import io.jmix.ui.Notifications;
 import io.jmix.ui.ScreenBuilders;
 import io.jmix.ui.action.Action;
 import io.jmix.ui.action.DialogAction;
@@ -18,8 +17,8 @@ import com.company.creditapplication.entity.Offer;
 import io.jmix.ui.screen.LookupComponent;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Collection;
-import java.util.UUID;
+import java.util.Objects;
+
 
 @UiController("cap_Offer.browse")
 @UiDescriptor("offer-browse.xml")
@@ -73,32 +72,28 @@ public class OfferBrowse extends StandardLookup<Offer> {
     @Subscribe("offersTable.generateCredit")
     public void onOffersTableGenerateCredit(Action.ActionPerformedEvent event) {
 
-        Offer singleSelected = offersTable.getSingleSelected();
+        Offer offer = offersTable.getSingleSelected();
         Credit credit = dataManager.create(Credit.class);
         credit.setIsActive(true);
-        credit.setAmount(singleSelected.getAmount());
-        credit.setNumberMounth(singleSelected.getNumberMonths());
-        credit.setPercent(singleSelected.getPercent());
-        singleSelected.setCredit(credit);
-        singleSelected =  dataManager.save(singleSelected);
+        credit.setAmount(offer.getAmount());
+        credit.setNumberMounth(offer.getNumberMonths());
+        credit.setPercent(offer.getPercent());
+        offer.setCredit(credit);
+        offer = dataManager.save(offer);
 
         screenBuilders.editor(Credit.class, this)
-                .editEntity(singleSelected.getCredit())
+                .editEntity(offer.getCredit())
                 .build()
                 .show();
     }
 
     @Subscribe(id = "offersDc", target = Target.DATA_CONTAINER)
     public void onOffersDcItemChange(InstanceContainer.ItemChangeEvent<Offer> event) {
-        Offer singleSelected = offersTable.getSingleSelected();
-        if (singleSelected.getCredit() == null) {
-            editBtn.setEnabled(true);
-            removeBtn.setEnabled(true);
-            generateCredit.setEnabled(true);
-        } else {
-            editBtn.setEnabled(false);
-            removeBtn.setEnabled(false);
-            generateCredit.setEnabled(false);
-        }
+        Offer offer = offersTable.getSingleSelected();
+        boolean enable = Objects.nonNull(offer) && Objects.isNull(offer.getCredit());
+
+        editBtn.setEnabled(enable);
+        removeBtn.setEnabled(enable);
+        generateCredit.setEnabled(enable);
     }
 }

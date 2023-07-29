@@ -47,11 +47,12 @@
         </scrollBox>
         <scrollBox id="scrollPass"  spacing="true"
                    caption="msg://com.company.creditapplication.entity/Client.offerEdit.scrollPass" width="100%">
-            <textField id="firstNameFieldPass" property="firstNamePass"/>
-            <textField id="lastNameFieldPass" property="lastNamePass"/>
-            <textField id="surnameFieldPass" property="surnamePass"/>
-            <textField id="serialPassportFieldPass" property="serialPassportPass"/>
-            <textField id="numberPassportFieldPass" property="numberPassportPass"/>
+            <textField id="firstNameFieldPass" property="passportDto.firstName" dataContainer="clientDc"/>
+            <textField id="lastNameFieldPass" property="passportDto.lastName" dataContainer="clientDc"/>
+            <textField id="surnameFieldPass" property="passportDto.surname" dataContainer="clientDc"/>
+            <textField id="serialPassportFieldPass" property="passportDto.numberPassport" dataContainer="clientDc"/>
+            <textField id="numberPassportFieldPass" property="passportDto.serialPassport" dataContainer="clientDc"/>
+            <form id="clientForm"/>
         </scrollBox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>

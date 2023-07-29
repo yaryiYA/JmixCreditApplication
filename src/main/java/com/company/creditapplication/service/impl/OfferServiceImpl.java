@@ -36,7 +36,6 @@ public class OfferServiceImpl {
         double amount = doubleValue(offer.getAmount());
         long monthlyPayment = (long) Math.round(amount * (p + (p / (Math.pow((1 + p), offer.getNumberMonths()) - 1))));
 
-        long interestTotal = 0;
         long summary = (long) doubleValue(offer.getAmount());
         List<PaymentShedule> paymentList = new ArrayList<>();
 

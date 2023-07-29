@@ -24,42 +24,22 @@ public class ClientEdit extends StandardEditor<Client> {
     @Autowired
     private EntityPicker<PassportDto> passportDtoField;
     @Autowired
-    private TextField<String> firstNameFieldPass;
-    @Autowired
-    private TextField<String> lastNameFieldPass;
-    @Autowired
-    private TextField<String> surnameFieldPass;
-    @Autowired
-    private TextField<String> serialPassportFieldPass;
-    @Autowired
-    private TextField<String> numberPassportFieldPass;
-    @Autowired
     private ScrollBoxLayout scrollPass;
 
 
-    @Subscribe("passportDtoField")
-    public void onPassportDtoFieldValueChange(HasValue.ValueChangeEvent<PassportDto> event) {
-        PassportDto value = passportDtoField.getValue();
-        getEditedEntity().setPassportID(value.getId());
-    }
 
     @Subscribe
     public void onBeforeShow(BeforeShowEvent event) {
 
-        if (getEditedEntity().getPassportDto() != null) {
+        if (getEditedEntity().getPassportID() != null) {
             passportDtoField.setVisible(false);
             scrollPass.setVisible(true);
-            PassportDto passportDto = getEditedEntity().getPassportDto();
-            firstNameFieldPass.setValue(passportDto.getFirstName());
-            lastNameFieldPass.setValue(passportDto.getLastName());
-            surnameFieldPass.setValue(passportDto.getSurname());
-            serialPassportFieldPass.setValue(String.valueOf(passportDto.getSerialPassport()));
-            numberPassportFieldPass.setValue(String.valueOf(passportDto.getNumberPassport()));
         } else {
             scrollPass.setVisible(false);
             passportDtoField.setVisible(true);
         }
     }
+
 
     @Install(to = "passportDtoLoader", target = Target.DATA_LOADER)
     private Client passportDtoLoaderLoadDelegate(LoadContext<Client> loadContext) {
@@ -68,9 +48,6 @@ public class ClientEdit extends StandardEditor<Client> {
             editedEntity.setPassportDto(clientPass.findByUUID(editedEntity.getPassportID()));
         }
         return editedEntity;
-
     }
-
-
 }
 

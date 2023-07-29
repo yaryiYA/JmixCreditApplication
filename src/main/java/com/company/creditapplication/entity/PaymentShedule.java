@@ -1,7 +1,5 @@
 package com.company.creditapplication.entity;
 
-import io.jmix.core.DeletePolicy;
-import io.jmix.core.entity.annotation.OnDeleteInverse;
 import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
@@ -28,7 +26,6 @@ public class PaymentShedule extends BaseEntity {
     @NotNull
     private BigDecimal loanBody;
 
-    @OnDeleteInverse(DeletePolicy.CASCADE)
     @JoinColumn(name = "OFFER_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Offer offer;

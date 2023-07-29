@@ -18,7 +18,6 @@ public class CreditProgram extends BaseEntity {
     private String name;
 
     @NotNull
-    @OnDeleteInverse(DeletePolicy.CASCADE)
     @JoinColumn(name = "BANK_ID", nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Bank bank;
